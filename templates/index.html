@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Lucas Apollo">
+        <title>Canal de Ouvidoria | {{ CLIENT_NAME }}</title>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+        
+        <!-- global -->
+        <link rel="stylesheet" href="{% static 'css/identidade.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+        <!-- específico da página -->
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+    </head>
+    <body>
+
+            <div class="top-bar"></div>
+
+            <header class="navbar">
+                <div class="logo-container">
+                    <img src=" {% static 'img/logo.png' %} " alt="Logotipo da Empresa" class="logo">
+                </div>
+                <nav class="nav-links">
+                    <a href="/" class="active">Início</a> | 
+                    <a href="/acompanhar">Acompanhar Protocolo</a> | 
+                    <a href="/politica">Política de Confidencialidade</a>
+                </nav>
+            </header>
+
+            <section class="hero-section">
+                <div class="hero-content">
+                    <h1 class="main-title">Sua voz importa. Sua identidade está protegida.</h1>
+                    <p class="subtitle">
+                        Canal seguro para relatar situações que violem os valores, a ética ou as normas internas da {{ CLIENT_NAME }}.
+                    </p>
+                </div>
+            </section>
+
+            <section class="guarantees-section">
+                <div class="guarantees-container">
+                    
+                    <div class="guarantee-card">
+                        <div class="card-icon">🔒</div>
+                        <div class="card-text">
+                            <h3>100% Confidencial</h3>
+                            <p>Sua identidade não será compartilhada sem a sua autorização.</p>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-card">
+                        <div class="card-icon">🛡️</div>
+                        <div class="card-text">
+                            <h3>Sem Retaliação</h3>
+                            <p>Nenhum colaborador sofrerá represálias por utilizar o canal de boa-fé.</p>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-card">
+                        <div class="card-icon">🆔</div>
+                        <div class="card-text">
+                            <h3>Protocolo Seguro</h3>
+                            <p>Cada relato recebe um número exclusivo para acompanhamento.</p>
+                        </div>
+                    </div>
+
+                    <div class="guarantee-card">
+                        <div class="card-icon">⚖️</div>
+                        <div class="card-text">
+                            <h3>Análise Independente</h3>
+                            <p>Todos os relatos são avaliados de forma imparcial por especialistas.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="formulario-wrapper">
+                <form id="form-denuncia" action="{% url 'inicio' %}" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-header">
+                        <span class="anonimato-label">Deseja permanecer anônimo?</span>
+                        
+                        <div class="opcoes-radio">
+                            <label class="radio-box">
+                                <input type="radio" id="anonimo-sim" name="anonimato" value="sim" checked onchange="gerenciarAnonimato()">
+                                <span class="checkmark"></span> SIM
+                            </label>
+
+                            <label class="radio-box">
+                                <input type="radio" id="anonimo-nao" name="anonimato" value="nao" onchange="gerenciarAnonimato()">
+                                <span class="checkmark"></span> NÃO
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="campos-identificacao" style="display: none;">
+                        <div class="form-group">
+                            <label for="nome">Nome:</label>
+                            <input type="text" id="nome" name="nome">
+                        </div>
+                        <div class="form-group">
+                            <label for="setor">Setor:</label>
+                            <input type="text" id="setor" name="setor">
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Telefone:</label>
+                            <input type="tel" name="telefone" id="telefone" class="form-control" maxlength="15" placeholder="(00) 00000-0000">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail:</label>
+                            <input type="email" name="email" id="email" class="form-control" placeholder="exemplo@email.com">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="testemunhas">Testemunhas:</label>
+                        <input type="text" name="testemunhas" id="testemunhas" class="form-control" required>
+                    </div>
+
+                    <div class="textarea-group">
+                        <label for="descricao">Descreva detalhadamente o ocorrido:</label>
+                        <textarea id="descricao" name="descricao" rows="6" required></textarea>
+                    </div>
+
+                    <div class="form-footer">
+                        <div class="upload-btn-wrapper">
+                            <button type="button" class="btn-anexo" onclick="document.getElementById('arquivo').click()">📄 ANEXAR PROVAS</button>
+                            <input type="file" name="arquivo" id="arquivo" multiple style="display:none;">
+                        </div>
+                        <ul id="lista-arquivos" style="list-style: none; margin-top: 10px; color: #333; font-size: 14px;"></ul>
+                        
+                        <label class="custom-checkbox">
+                            <!-- O input invisível -->
+                            <input type="checkbox" id="boa_fe" name="boa_fe" required>
+                            <!-- A nossa caixinha desenhada no CSS -->
+                            <span class="checkmark"></span>
+                            <!-- O texto como link (o event.stopPropagation evita que clicar no link marque a caixa sem querer) -->
+                            <a href="#" onclick="abrirModal(event)" style="color: #ffffff; text-decoration: underline; font-weight: 500;">
+                                Termo de ciência e comprometimento
+                            </a>
+                        </label>
+
+                        <!-- ================= MODAL DE REGRAS (POP-UP) ================= -->
+                        <div id="modal-termo" class="modal">
+                            <div class="modal-content">
+                                <span class="close-btn" onclick="fecharModal()">&times;</span>
+                                <h2 style="color: var(--primary-color); margin-bottom: 15px;">Termos e Prazos</h2>
+                                <p style="color: var(--text-dark); font-size: 14px; line-height: 1.6;">
+                                    <strong>1. Prazos:</strong> A análise inicial será realizada em até 7 dias úteis.<br><br>
+                                    <strong>2. Acompanhamento:</strong> O denunciante deve guardar o Número de Protocolo gerado ao final, sendo esta a única forma de consultar respostas.<br><br>
+                                    <strong>3. Boa-fé:</strong> Declaro que as informações prestadas são verdadeiras e estou ciente do funcionamento do portal.
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="submit-container">
+                        <button type="submit" class="btn-enviar">ENVIAR OUVIDORIA</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="copyright">
+                <p>Copyright © 2026 - Developed by <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
+            </div>
+
+
+            <script src="{% static 'js/script.js' %}"></script>
+    </body>
+</html>

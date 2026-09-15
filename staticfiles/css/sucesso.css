@@ -1,0 +1,164 @@
+/* ==========================================================================
+   sucesso.css - PÁGINA DE SUCESSO (SaaS Premium)
+   ========================================================================== */
+.success-page-container {
+    max-width: 680px;
+    margin: 4rem auto;
+    background-color: var(--bg-card); 
+    padding: 3rem 2.5rem;
+    border-radius: var(--radius-base);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.success-icon-wrapper {
+    width: 72px;
+    height: 72px;
+    background-color: var(--status-neutral-bg); 
+    color: var(--status-success); 
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 0 0 8px rgb(16, 185, 44); 
+}
+
+.success-icon-wrapper svg {
+    width: 36px;
+    height: 36px;
+}
+
+.success-page-container .main-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color); 
+    margin-bottom: 1rem;
+}
+
+.success-page-container .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted); 
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+/* Caixa do Protocolo - Modelo Outlined */
+.protocol-box-modern {
+    background-color: transparent; 
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: left;
+}
+
+.protocol-header-modern {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.protocol-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; 
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.protocol-number-highlight {
+    font-family: monospace;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--text-main);
+    letter-spacing: 0.1em;
+    margin: 0;
+}
+
+.protocol-hint-modern {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Ações e Botões */
+/* Contêiner dos botões: Separados e centralizados */
+.success-actions-modern {
+    display: flex;
+    gap: 1.5rem; 
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* Classe base para garantir que AMBOS os botões sejam idênticos no tamanho */
+.btn-sucesso-action {
+    flex: 1; /* Força os dois a dividirem o espaço igualmente */
+    min-width: 220px;
+    max-width: 280px; /* Evita que fiquem gigantes em monitores grandes */
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 8px; /* Formato levemente retangular da imagem */
+    text-align: center;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+/* Estilo do botão "Copiar" (Fundo cinza, texto escuro) */
+.btn-copiar {
+    background-color: #f3f4f6;
+    color: var(--text-dark);
+    border-color: var(--border-color);
+}
+
+.btn-copiar:hover {
+    background-color: #e5e7eb;
+}
+
+/* Estilo do botão "Acompanhar" (Vazado, contorno azul) */
+.btn-acompanhar {
+    background-color: transparent;
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-acompanhar:hover {
+    background-color: var(--status-neutral-bg);
+}
+
+/* Estado de Sucesso (Controlado pelo JavaScript) */
+.btn-copiado-sucesso {
+    background-color: var(--status-success) !important;
+    color: #ffffff !important;
+    border-color: var(--status-success) !important;
+}
+
+
+/* Classe dinâmica ativada via JavaScript quando o protocolo é copiado */
+.btn-copiado-sucesso {
+    background-color: var(--status-success) !important;
+    color: #ffffff !important;
+    border-color: var(--status-success) !important;
+}

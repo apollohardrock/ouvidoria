@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Lucas Apollo">
+    <title>Ouvidoria Enviada | {{ CLIENT_NAME }}</title>
+
+    <!-- 1º: As Variáveis de Identidade da Empresa -->
+    <link rel="stylesheet" href="{% static 'css/identidade.css' %}">
+    
+    <!-- 2º: O Esqueleto global -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    <!-- 3º: O estilo específico desta página -->
+    <link rel="stylesheet" href="{% static 'css/sucesso.css' %}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="{% static 'img/logo.png' %}" alt="Logotipo da Empresa" class="logo">
+        </div>
+        <nav class="nav-links">
+            <a href="/" class="active">Início</a>
+            <a href="/acompanhar">Acompanhar Protocolo</a>
+            <a href="/politica">Política de Confidencialidade</a>
+        </nav>
+    </header>
+
+    <main class="success-page-container">
+        
+        <div class="success-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+        </div>
+
+        <h1 class="main-title">Ouvidoria Registrada com Sucesso!</h1>
+        <p class="subtitle">
+            Agradecemos a sua colaboração. O seu relato é sigiloso e de extrema importância para a integridade da <strong>{{ CLIENT_NAME }}</strong>. Guarde o número do seu protocolo abaixo para acompanhar o andamento.
+        </p>
+
+        <div class="protocol-box-modern">
+            <div class="protocol-header-modern">
+                <span>🔒</span>
+                <span>Seu Número de Protocolo Seguro:</span>
+            </div>
+            
+            <div class="protocol-flex">
+                <h2 id="protocolo-gerado" class="protocol-number-highlight">{{ protocolo }}</h2> 
+            </div>
+            
+            <p class="protocol-hint-modern">⚠️ Este código é a única forma de acessar o sistema anonimamente.</p>
+        </div>
+
+        <div class="success-actions-modern">
+            <button class="btn-sucesso-action btn-copiar" id="btn-copiar-texto" onclick="copiarProtocolo()">
+                Copiar Número do Protocolo
+            </button>
+            <a href="/acompanhar" class="btn-sucesso-action btn-acompanhar">
+                Acompanhar Protocolo
+            </a>
+        </div>
+
+    </main>
+
+    <div class="copyright success-copyright">
+        <p>Copyright © 2026 - Developed by <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
+    </div>
+
+    <script>
+        function copiarProtocolo() {
+            const protocoloText = document.getElementById('protocolo-gerado').innerText;
+            
+            navigator.clipboard.writeText(protocoloText).then(() => {
+                const btnTexto = document.getElementById('btn-copiar-texto');
+                const textoOriginal = "Copiar Número do Protocolo";
+                
+                /* Manipulação visual transferida inteiramente para a classe CSS */
+                btnTexto.classList.add('btn-copiado-sucesso');
+                btnTexto.innerText = "✓ Protocolo Copiado!";
+                
+                setTimeout(() => {
+                    btnTexto.classList.remove('btn-copiado-sucesso');
+                    btnTexto.innerText = textoOriginal;
+                }, 3000);
+            }).catch(err => {
+                console.error('Falha ao copiar: ', err);
+                alert("Não foi possível copiar automaticamente. Selecione e copie o texto manualmente.");
+            });
+        }
+    </script>
+</body>
+</html>

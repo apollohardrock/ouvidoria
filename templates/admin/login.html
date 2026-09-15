@@ -1,0 +1,26 @@
+{% extends "admin/login.html" %}
+{% load static %}
+
+{% block extrastyle %}
+{{ block.super }}
+<!-- Importa o novo arquivo CSS separado da tela de login -->
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+<!-- Substitui o título padrão do Django pela Logo e Nome dinâmico -->
+{% block content_title %}
+<div class="login-header-custom">
+    <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+    <h2>Portal de Análise - {{ CLIENT_NAME}}</h2>
+</div>
+{% endblock %}
+
+<!-- Injeta o formulário original e adiciona o botão de recuperar senha logo abaixo -->
+{% block content %}
+    {{ block.super }}
+    
+    <div class="forgot-password-link">
+        <!-- Direciona para o sistema automático de reset de senha do Django -->
+        <a href="{% url 'admin_password_reset' %}">Esqueci minha senha</a>
+    </div>
+{% endblock %}

@@ -1,0 +1,97 @@
+/* Hero Section */
+.hero-section {
+    margin: 1rem 10%; border-radius: 30px; text-align: center;
+    padding: 60px 20px 40px;
+    background-image: linear-gradient(rgba(10, 49, 83, 0.7), rgba(10, 49, 83, 0.9)), url('../img/background-bigcard.jpg');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+}
+.main-title { font-size: 42px; font-weight: 800; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
+.main-title .highlight-blue { color: var(--text-main); }
+.subtitle { font-size: 18px; color: #e2e8f0; max-width: 650px; margin: 0 auto; font-weight: 500; }
+
+/* Secção de Garantias (Cards) */
+.guarantees-section { padding: 0 5% 50px; }
+.guarantees-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; max-width: 850px; margin: 0 auto; }
+.guarantee-card {
+    padding: 20px; background-color: var(--bg-card); color: var(--text-dark);
+    border-radius: var(--radius-base); display: flex; align-items: center; text-align: left; gap: 18px; width: 100%;
+}
+.card-icon {
+    font-size: 32px; flex-shrink: 0; margin: 0; background-color: var(--secondary-color);
+    color: #fff; padding: 12px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+}
+.card-text { display: flex; flex-direction: column; justify-content: center; }
+.guarantee-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 4px; color: var(--primary-color); }
+.guarantee-card p { font-size: 13px; line-height: 1.4; margin: 0; color: var(--text-muted); }
+
+/* Formulário Principal */
+.formulario-wrapper { max-width: 750px; margin: 0 auto 6rem auto; padding: 0 1.5rem; }
+#form-denuncia {
+    background-color: var(--bg-card); color: var(--text-dark); border: 1px solid var(--border-color);
+    border-radius: var(--radius-base); padding: 3rem; box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.03);
+}
+
+/* Opções de Anonimato */
+.form-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; margin-bottom: 25px; }
+.anonimato-label { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
+.opcoes-radio { display: flex; gap: 25px; }
+.radio-box { display: flex; align-items: center; gap: 8px; cursor: pointer; font-weight: 700; color: var(--text-dark); font-size: 1rem; }
+.radio-box input { display: none; }
+.checkmark {
+    width: 20px; height: 20px; border: 2px solid var(--border-color); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; position: relative;
+    transition: all 0.2s ease; background-color: var(--bg-card);
+}
+.radio-box input:checked + .checkmark { background-color: var(--secondary-color); border-color: var(--secondary-color); }
+.radio-box input:checked + .checkmark::after { content: "✖"; color: #ffffff; font-size: 12px; font-weight: bold; }
+
+/* Campos Lado a Lado e Textarea */
+.form-group { display: flex; align-items: center; margin-bottom: 1.75rem; gap: 15px; }
+.form-group label { display: block; font-weight: 600; font-size: 0.9rem; color: var(--primary-color); width: 150px; flex-shrink: 0; text-align: left; margin: 0; }
+.textarea-group { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 1.75rem; }
+.textarea-group label { width: 100%; text-align: left; font-weight: 600; font-size: 0.9rem; color: var(--primary-color); margin: 0; }
+.textarea-group textarea { width: 100%; min-height: 120px; resize: vertical; }
+.form-control, input[type="text"], input[type="email"], input[type="tel"], textarea {
+    flex-grow: 1; width: auto; padding: 0.85rem 1.1rem; font-family: var(--font-stack); font-size: 0.98rem;
+    border: 1px solid var(--border-color); border-radius: 8px; background-color: var(--bg-card);
+    color: var(--text-dark); transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.form-control:focus, textarea:focus { outline: none; border-color: var(--primary-color); box-shadow: 0 0 0 4px rgba(0, 96, 151, 0.1); }
+
+/* Correção do Checkbox de Boa-Fé */
+.custom-checkbox input[type="checkbox"] { display: none; }
+.custom-checkbox { display: flex; align-items: center; gap: 12px; cursor: pointer; margin-top: 1.5rem; text-align: left; color: var(--text-dark); font-weight: 500; font-size: 0.92rem; }
+.custom-checkbox .checkmark {
+    width: 22px; height: 22px; border: 2px solid var(--border-color); border-radius: 4px;
+    display: flex; align-items: center; justify-content: center; position: relative; background-color: transparent; flex-shrink: 0; transition: all 0.2s ease;
+}
+.custom-checkbox input[type="checkbox"]:checked + .checkmark { background-color: var(--secondary-color); border-color: var(--secondary-color); }
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after { content: "✖"; color: #ffffff; font-size: 14px; font-weight: bold; }
+
+/* Botão de Envio */
+.form-footer { border-top: 1px solid var(--border-color); padding-top: 1.5rem; margin-top: 2rem; }
+.submit-container { margin-top: 2.2rem; }
+.btn-enviar {
+    width: 100%; background-color: var(--secondary-color) !important; color: #ffffff !important; border: none !important;
+    border-radius: var(--radius-pill) !important; padding: 14px 28px; font-size: 1rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; transition: all 0.2s ease; box-shadow: 0 4px 12px rgba(236, 101, 54, 0.2);
+}
+.btn-enviar:hover { background-color: #1100ff !important; box-shadow: 0 6px 16px rgba(236, 101, 54, 0.3); }
+
+/* Pop-up do Termo (Modal) */
+.modal { display: none; position: fixed; z-index: 9999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.6); align-items: center; justify-content: center; }
+.modal-content { background-color: #ffffff; padding: 30px; border-radius: 12px; max-width: 500px; width: 90%; position: relative; text-align: left; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+.close-btn { position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; color: #888; cursor: pointer; }
+.close-btn:hover { color: var(--secondary-color); }
+
+/* Responsividade Mobile Específica da Index */
+@media (max-width: 768px) {
+    .hero-section { margin: 1rem 3%; padding: 40px 15px 30px; }
+    .main-title { font-size: 28px; }
+    .guarantees-container { grid-template-columns: 1fr; align-items: center; }
+    .guarantee-card { max-width: 100%; width: 100%; }
+    .form-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .form-group { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .form-group label { width: 100%; text-align: left; }
+    #form-denuncia { padding: 1.8rem 1.2rem; }
+}

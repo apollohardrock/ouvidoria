@@ -1,0 +1,53 @@
+/* 1. Oculta o cabeçalho azul nativo do Django apenas na tela de login para deixar mais limpo */
+#header {
+    display: none;
+}
+
+/* 2. Remove a frase nativa do Django ("Se esqueceu das suas credenciais de login?") apontada na imagem */
+.password-reset-link {
+    display: none !important;
+}
+
+/* 3. Centraliza e estiliza a logo e o título acima da caixa de login */
+.login-header-custom {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.login-header-custom img {
+    max-width: 220px;
+    margin-bottom: 15px;
+    /* Adiciona o fundo azul escuro da empresa apenas na caixa da logo para dar contraste ao branco */
+    background-color: #0a3153; 
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.login-header-custom h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: #0a3153;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* 4. Mantém apenas o seu link customizado de 'Esqueci a Senha' no rodapé da caixa */
+.forgot-password-link {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.forgot-password-link a {
+    color: #ff0000; 
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: opacity 0.2s ease;
+}
+
+.forgot-password-link a:hover {
+    opacity: 0.7;
+}

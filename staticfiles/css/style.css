@@ -1,0 +1,587 @@
+/* ==========================================================================
+   1. VARIÁVEIS GLOBAIS (CORES E FORMAS SKYGLASS)
+   ========================================================================== */
+:root {
+    /* Cores Principais */
+    --primary-color: #27272a;   /* Cor principal */
+    --secondary-color: #26027a; /* Cor de contraste */
+
+    /* Fundo e Textos */
+    --bg-main: #0047cb;         /* Fundo geral da página */
+    --bg-card: #006097;         /* Fundo branco para formulários e cards */
+    --text-main: #ffffff;       /* Texto branco padrão */
+    --text-dark: #333333;       /* Texto escuro para dentro dos cards/inputs */
+    --text-muted: #64748b;      /* Texto secundário/cinzento */
+    --border-color: #e2e8f0;    /* Cor das bordas fracas */
+
+    /* Tipografia e Arredondamentos */
+    --font-stack: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius-base: 16px;
+    --radius-pill: 50px;
+}
+
+/* ==========================================================================
+   2. RESET E BASE
+   ========================================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-stack) !important;
+    background-color: var(--primary-color);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* ==========================================================================
+   3. CABEÇALHO E MENU (NAVBAR)
+   ========================================================================== */
+.top-bar {
+    background-color: #00001a;
+    height: 20px;
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 5%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container .logo {
+    max-height: 60px;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    border-radius: 2rem;
+    padding: 10px 30px;
+    gap: 15px;
+    background-color: #061c31;
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--secondary-color);
+}
+
+.nav-links a.active {
+    color: #ffffff;
+    font-weight: 800;
+}
+
+/* ==========================================================================
+   4. TÍTULO PRINCIPAL (HERO SECTION)
+   ========================================================================== */
+.hero-section {
+    margin: 1rem 10%;
+    border-radius: 30px;
+    text-align: center;
+    padding: 60px 20px 40px;
+    background-image: linear-gradient(rgba(10, 49, 83, 0.7), rgba(10, 49, 83, 0.9)), url('../img/skyglass.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-title {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.2;
+    margin-bottom: 20px;
+    letter-spacing: -0.5px;
+}
+
+.main-title .highlight-blue {
+    color: var(--text-main);
+}
+
+.subtitle {
+    font-size: 18px;
+    color: #e2e8f0;
+    max-width: 650px;
+    margin: 0 auto;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   5. SEÇÃO DE GARANTIAS (CARDS)
+   ========================================================================== */
+.guarantees-section {
+    padding: 0 5% 50px;
+}
+
+.guarantees-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.guarantee-card {
+    padding: 20px;
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    border-radius: var(--radius-base);
+    display: flex;
+    align-items: center;
+    text-align: left;
+    gap: 18px;
+    width: 100%;
+}
+
+.card-icon {
+    font-size: 32px;
+    flex-shrink: 0;
+    margin: 0;
+    background-color: var(--secondary-color);
+    color: #fff;
+    padding: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.guarantee-card h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+.guarantee-card p {
+    font-size: 13px;
+    line-height: 1.4;
+    margin: 0;
+    color: var(--text-main);
+}
+
+/* ==========================================================================
+   6. FORMULÁRIO PRINCIPAL
+   ========================================================================== */
+.formulario-wrapper {
+    max-width: 750px;
+    margin: 0 auto 6rem auto;
+    padding: 0 1.5rem;
+}
+
+#form-denuncia {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-base);
+    padding: 3rem;
+    box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.03);
+}
+
+/* Cabeçalho do Formulário (Anonimato) */
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+    margin-bottom: 25px;
+}
+
+.anonimato-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+
+.opcoes-radio {
+    display: flex;
+    gap: 25px;
+}
+
+.radio-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.radio-box input {
+    display: none; 
+}
+
+.checkmark {
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: all 0.2s ease;
+    background-color: var(--bg-card);
+}
+
+.radio-box input:checked + .checkmark {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+.radio-box input:checked + .checkmark::after {
+    content: "✖"; 
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Campos de Input e Labels (Lado a Lado) */
+.form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 1rem;
+    width: 150px;
+    flex-shrink: 0;
+    text-align: right;
+    margin: 0;
+}
+
+/* Último Campo (Textarea) - Rótulo por cima */
+.textarea-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 1.75rem;
+}
+
+.textarea-group label {
+    width: 100%;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.textarea-group textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-control, input[type="text"], input[type="email"], input[type="tel"], textarea {
+    flex-grow: 1;
+    width: auto;
+    padding: 0.85rem 1.1rem;
+    font-family: var(--font-stack);
+    font-size: 0.98rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--text-main);
+    color: var(--text-dark);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus, textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(0, 96, 151, 0.1);
+}
+
+/* Checkbox Boa Fé */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 1.5rem;
+}
+
+/* Botões do Formulário */
+
+.btn-anexo {
+    background-color: #EC6536;
+    border-radius: 1rem;
+    padding: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.btn-enviar {
+    background-color: var(--secondary-color) !important;
+    width: 250px;
+    margin: 0 150px;
+    color: #ffffff !important;
+    border: none !important;
+    border-radius: var(--radius-pill) !important;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(236, 101, 54, 0.2);
+}
+
+.btn-enviar:hover {
+    background-color: #d1551a !important;
+    box-shadow: 0 6px 16px rgba(236, 101, 54, 0.3);
+}
+
+.submit-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 2.2rem;
+}
+
+/* ==========================================================================
+   7. PÁGINAS AUXILIARES E SUCESSO
+   ========================================================================== */
+.tracking-card, .policy-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-base);
+    padding: 3rem;
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+}
+
+.policy-wrapper {
+    max-width: 800px;
+    margin: 2rem auto 6rem auto;
+    padding: 0 1.5rem;
+}
+
+.policy-content h2 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.policy-content p {
+    color: var(--text-muted);
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   8. RESPONSIVIDADE (MOBILE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 16px 20px;
+        gap: 12px;
+    }
+    
+    .nav-links {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+
+    .hero-section {
+        margin: 1rem 3%;
+        padding: 40px 15px 30px;
+    }
+
+    .main-title {
+        font-size: 28px;
+    }
+
+    .guarantees-container {
+        grid-template-columns: 1fr;
+        align-items: center;
+    }
+
+    .guarantee-card {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .form-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .form-group {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .form-group label {
+        width: 100%;
+        text-align: left;
+    }
+
+    #form-denuncia {
+        padding: 1.8rem 1.2rem;
+    }
+
+    .tracking-card, .policy-content {
+        padding: 1.5rem;
+    }
+}
+
+/* --- RODAPÉ (COPYRIGHT) --- */
+.copyright {
+    width: 100%;
+    padding: 15px; /* Espaço para o texto não encostar nas bordas laterais */
+    text-align: center;
+    background-color: #00001a; /* O fundo escuro que você já está usando na imagem */
+    box-sizing: border-box; /* A MÁGICA: Impede que o tamanho vaze da tela */
+    margin-top: auto;
+}
+
+.copyright p {
+    margin: 0;
+    color: #FFFFFF;
+    /* Reduz a fonte no mobile e aumenta levemente na TV/Monitor */
+    font-size: clamp(0.75rem, 3.5vw, 1rem); 
+    line-height: 1.5; /* Dá um espacinho entre as linhas caso o texto quebre */
+    
+    /* Se a tela for absurdamente fina, ele permite quebrar o link no meio para não vazar */
+    word-break: break-word; 
+}
+
+/* --- PREGA O RODAPÉ NO CHÃO EM TVs E MONITORES --- */
+@media (min-width: 768px) {
+    .copyright {
+        position: fixed; /* Solta o rodapé do resto do site */
+        bottom: 0;       /* Prega ele no pixel zero da parte de baixo */
+        left: 0;         /* Alinha à esquerda */
+        width: 100%;     /* Estica de ponta a ponta */
+        margin-top: 0;   /* Anula a margem que tínhamos colocado antes */
+        z-index: 10;     /* Garante que ele fique por cima de tudo */
+    }
+    
+    /* Dá um respiro no fundo da tela para o rodapé não cobrir a tabela */
+    body {
+        padding-bottom: 60px; 
+    }
+}
+
+/* =========================================
+   CORREÇÃO DO CHECKBOX 
+   ========================================= */
+/* Esconde o quadradinho branco solto da imagem */
+.custom-checkbox input[type="checkbox"] {
+    display: none; 
+}
+
+/* Alinha a caixa e o link perfeitamente lado a lado */
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    text-align: left;
+}
+
+/* A caixinha quadrada (borda branca para ver no fundo azul) */
+.custom-checkbox .checkmark {
+    width: 22px;
+    height: 22px;
+    border: 2px solid #ffffff; 
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: transparent;
+    flex-shrink: 0; /* Impede que esmague se a tela for muito pequena */
+    transition: all 0.2s ease;
+}
+
+/* Quando clicado: Fica Laranja e a borda acompanha */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+/* O "X" branco (aparece apenas quando marcado) */
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+    content: "✖"; 
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* =========================================
+   MODAL (POP-UP DO TERMO)
+   ========================================= */
+.modal {
+    display: none; /* Escondido por defeito */
+    position: fixed; 
+    z-index: 9999; 
+    left: 0; 
+    top: 0; 
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo escuro transparente */
+    align-items: center; 
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 500px;
+    width: 90%;
+    position: relative;
+    text-align: left;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: var(--secondary-color);
+}

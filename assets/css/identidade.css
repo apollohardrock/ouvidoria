@@ -1,0 +1,22 @@
+/* ==========================================================================
+   VARIÁVEIS GLOBAIS (Matriz)
+   ========================================================================== */
+:root {
+    /* Cores Principais */
+    --primary-color: #00198a;   
+    --secondary-color: #998700; 
+
+    /* Fundo e Textos */
+    --bg-main: #9c9a86;
+    --bg-secondary: #061c31;
+    --bg-card: #061c3188;         
+    --text-main: #ffffff;       
+    --text-dark: #000000;       
+    --text-muted: #000000;      
+    --border-color: #e2e8f0;    
+
+    /* Tipografia e Arredondamentos */
+    --font-stack: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --radius-base: 16px;
+    --radius-pill: 50px;
+}

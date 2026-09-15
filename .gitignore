@@ -1,0 +1,15 @@
+# Ambiente Virtual
+venv/
+env/
+
+# Arquivos de cache do Python
+__pycache__/
+*.pyc
+
+# Pasta de mídia (Onde ficam os PDFs/Imagens das denúncias que testamos)
+media/
+
+# Arquivos de variáveis de ambiente (Senhas, chaves de segurança)
+.env
+
+.DS_Store

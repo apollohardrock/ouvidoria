@@ -1,0 +1,49 @@
+/* ==========================================================================
+   base.css - RESET E BASE (Esqueleto Global)
+   ========================================================================== */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: var(--font-stack) !important;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+}
+
+/* --- Cabeçalho e Menu (Navbar) --- */
+.top-bar { background-color: var(--bg-secondary); height: 15px; width: 100%; }
+
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 5%; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container .logo { max-height: 60px; width: auto; }
+
+.nav-links {
+    display: flex; border-radius: 2rem; padding: 10px 30px;
+    gap: 15px; background-color: #061c31;
+}
+
+.nav-links a {
+    color: #ffffff; text-decoration: none; font-size: 1rem; transition: all 0.3s ease;
+}
+
+.nav-links a:hover { color: var(--secondary-color); }
+.nav-links a.active { color: #ffffff; font-weight: 800; }
+
+.copyright {
+    background-color: var(--bg-secondary);
+    display: flex;
+    justify-content: center;
+}
+.copyright a {
+    color: #ffffff; text-decoration: none; font-size: 1rem; transition: all 0.3s ease;
+}
+
+/* Responsividade Global */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; padding: 16px 20px; gap: 12px; }
+    .nav-links { width: 100%; justify-content: center; flex-wrap: wrap; gap: 16px; }
+}

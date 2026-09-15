@@ -1,0 +1,210 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Lucas Apollo">
+        <title>Acompanhar Protocolo | {{ CLIENT_NAME }}</title>
+
+        <!-- global -->
+        <link rel="stylesheet" href="{% static 'css/identidade.css' %}">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+        <!-- específico da página -->
+        <link rel="stylesheet" href="{% static 'css/acompanhar.css' %}">
+    </head>
+    <body>
+
+        <!-- Barra superior azul escura -->
+        <div class="top-bar"></div>
+
+        <header class="navbar">
+            <div class="logo-container">
+                <img src="{% static 'img/logo.png' %}" alt="Logotipo da Empresa" class="logo">
+            </div>
+            <nav class="nav-links">
+                <a href="{% url 'inicio' %}">Início</a> 
+                <a href="{% url 'acompanhar' %}" class="active">Acompanhar Protocolo</a> 
+                <a href="{% url 'politica' %}">Política de Confidencialidade</a>
+            </nav>
+        </header>
+
+        <!-- Caixa Escura Arredondada para o Título -->
+        <section class="hero-box">
+            <h1>Acompanhe o seu Relato</h1>
+            <p>Insira o número do protocolo recebido para consultar o estado e interagir com a equipe de análise de forma confidencial.</p>
+        </section>
+
+        <!-- Caixa Branca de Contraste para o Formulário e Chat -->
+        <section class="form-container tracking-wrapper">
+            
+            <div class="search-area">
+                <form method="GET" action="{% url 'acompanhar' %}">
+                    <label for="protocolo" class="form-label-custom">Número do Protocolo Seguro</label>
+                    <div class="input-search-group">
+                        <input type="text" name="protocolo" id="protocolo" class="form-control" 
+                            value="{{ protocolo|default:'' }}" placeholder="Ex: APL-20890615-A1B2C3D4E5" required>
+                        <button type="submit" class="btn-submit">
+                            Consultar Estado
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            {% if erro %}
+                <div class="error-box">
+                    ⚠️ {{ erro }}
+                </div>
+            {% endif %}
+
+            {% if denuncia %}
+                <div class="protocol-results">
+                    
+                    <div class="protocol-header">
+                        <h2 class="protocol-title">
+                            Protocolo: <span>{{ denuncia.protocolo }}</span>
+                        </h2>
+                        
+                        <span class="status-badge 
+                            {% if denuncia.status == 'Pendente' or 'Novo' in denuncia.status %} status-pendente
+                            {% elif 'Análise' in denuncia.status or 'Andamento' in denuncia.status %} status-analise
+                            {% else %} status-concluido {% endif %}">
+                            ● {{ denuncia.status }}
+                        </span>
+                    </div>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Data de Abertura</strong>
+                            📅 {{ denuncia.criado_em|date:"d/m/Y \á\s H:i" }}
+                        </div>
+                        <div class="info-item">
+                            <strong>Canal de Envio</strong>
+                            🔒 Plataforma Segura & Encaminhamento Encriptado
+                        </div>
+                    </div>
+
+                    <div class="summary-section">
+                        <strong class="summary-title">Resumo do Relato Enviado</strong>
+                        <div class="description-box">
+                            {{ denuncia.descricao }}
+                        </div>
+                    </div>
+
+                    <h3 class="chat-section-title">
+                        💬 Histórico de Interações e Atualizações
+                    </h3>
+
+                    <div class="chat-messages-container" id="chatContainer">
+                        {% if not mensagens %}
+                            <p class="empty-chat-msg">
+                                Ainda não existem mensagens nem atualizações registadas neste processo.
+                            </p>
+                        {% else %}
+                            {% for msg in mensagens %}
+                                {% if not msg.usuario_admin or msg.visivel_denunciante %}
+                                    <div class="chat-bubble {% if msg.usuario_admin %}chat-bubble-admin{% else %}chat-bubble-user{% endif %}">
+                                        <span class="chat-author-tag">
+                                            {% if msg.usuario_admin %}Equipe de Análise{% else %}Você (Denunciante){% endif %}
+                                        </span>
+                                        
+                                        <div class="chat-msg-text">{{ msg.texto|linebreaksbr }}</div>
+                                        
+                                        {% for anexo in msg.anexos.all %}
+                                            <div class="chat-attachment">
+                                                <a href="{{ anexo.arquivo.url }}" target="_blank">
+                                                    📎 Baixar anexo enviado ({{ forloop.counter }})
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                        
+                                        <span class="chat-time">{{ msg.criado_em|date:"d/m/Y H:i" }}</span>
+                                    </div>
+                                {% endif %}
+                            {% empty %}
+                                <p class="empty-chat-msg"><em>Aguardando análise inicial da equipe.</em></p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+
+                    <form method="POST" action="{% url 'acompanhar' %}?protocolo={{ denuncia.protocolo }}" enctype="multipart/form-data" class="reply-form-card">
+                        {% csrf_token %}
+                        <input type="hidden" name="protocolo" value="{{ denuncia.protocolo }}">
+                        <input type="hidden" name="nova_mensagem" value="true">
+
+                        <div class="reply-input-group">
+                            <label class="form-label-custom">
+                                Adicionar novas informações ou responder à equipe:
+                            </label>
+                            <textarea name="mensagem_texto" rows="3" class="reply-textarea" placeholder="Escreva aqui novos detalhes, respostas ou esclarecimentos sobre o caso..." required></textarea>
+                        </div>
+
+                        <div class="reply-actions">
+                            <div class="upload-area">
+                                <div class="upload-btn-wrapper">
+                                    <button type="button" class="btn-anexo-custom" onclick="document.getElementById('arquivo-chat').click()">
+                                        📁 ADICIONAR PROVAS
+                                    </button>
+                                    <input type="file" name="mensagem_arquivos" id="arquivo-chat" class="hidden-input" multiple>
+                                </div>
+                                <ul id="lista-arquivos-chat" class="chat-file-list"></ul>
+                            </div>
+                            
+                            <button type="submit" class="btn-submit btn-auto-width">
+                                Enviar Atualização
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        </section>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const inputChat = document.getElementById('arquivo-chat');
+                const listaChat = document.getElementById('lista-arquivos-chat');
+                const dataTransferChat = new DataTransfer();
+
+                if (inputChat) {
+                    inputChat.addEventListener('change', function() {
+                        for (let i = 0; i < this.files.length; i++) {
+                            dataTransferChat.items.add(this.files[i]);
+                        }
+                        this.value = '';
+                        atualizarListaChat();
+                    });
+                }
+
+                function atualizarListaChat() {
+                    listaChat.innerHTML = ''; 
+                    for (let i = 0; i < dataTransferChat.files.length; i++) {
+                        let li = document.createElement('li');
+                        li.classList.add('chat-file-item');
+                        
+                        let nomeArquivo = document.createElement('span');
+                        nomeArquivo.innerText = '📎 ' + dataTransferChat.files[i].name;
+                        nomeArquivo.classList.add('chat-file-name');
+                        
+                        let btnRemover = document.createElement('button');
+                        btnRemover.type = "button";
+                        btnRemover.innerHTML = "✖ Remover";
+                        btnRemover.classList.add('btn-remove-chat-file');
+                        
+                        btnRemover.onclick = function() {
+                            dataTransferChat.items.remove(i);
+                            atualizarListaChat(); 
+                        };
+
+                        li.appendChild(nomeArquivo);
+                        li.appendChild(btnRemover);
+                        listaChat.appendChild(li);
+                    }
+                    if (inputChat) {
+                        inputChat.files = dataTransferChat.files;
+                    }
+                }
+            });
+        </script>
+    </body>
+</html>

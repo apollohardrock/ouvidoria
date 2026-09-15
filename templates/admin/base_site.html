@@ -1,0 +1,75 @@
+{% extends "admin/base.html" %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    <style>
+        /* Oculta o botão de troca de tema no cabeçalho */
+        #theme-toggle {
+            display: none !important;
+        }
+
+        /* Injeta a paleta forçando prioridade máxima em ambos os temas */
+        :root, html[data-theme="light"], html[data-theme="dark"] {
+            --header-bg: #125196 !important;
+            --header-color: #ffffff !important;
+            
+            --primary: #125196 !important;
+            --secondary: #EC6536 !important;
+            
+            --button-bg: #2563eb !important;
+            --button-hover-bg: #1d4ed8 !important;
+            
+            --link-fg: #2563eb !important;
+            --link-hover-color: #1d4ed8 !important;
+        }
+
+        .breadcrumbs {
+            background: #EC6536 !important;
+            color: #000 !important;
+        }
+
+        .app-list {
+            border: #EC6536;
+            border-color: #000;
+        }
+        
+        /* ==========================================================================
+        AJUSTES FINOS NO CHAT DO PAINEL ADMINISTRATIVO
+        ========================================================================== */
+
+        /* 1. Reduz a altura da caixa de texto (textarea) para acompanhar o texto de forma compacta */
+        .inline-group .tabular td.original p{
+            position: fixed !important;
+        }
+        .inline-group .tabular textarea {
+            height: 45px !important;
+            min-height: 40px !important;
+            max-height: 120px;
+            resize: vertical;
+            width: 100% !important;
+        }
+
+        /* 2. Alinha os elementos verticalmente na tabela */
+        .inline-group .tabular td {
+            vertical-align: middle !important;
+        }
+
+        /* 3. Oculta o botão 'Choose File' e o campo de arquivo quando não houver nova seleção necessária nas linhas existentes */
+        .inline-group .tabular tr.has_original input[type="file"] {
+            display: none !important;
+        }
+
+        
+
+    </style>
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    <script>
+        // Trava o painel no tema claro assim que a página carrega
+        document.addEventListener('DOMContentLoaded', function() {
+            document.documentElement.setAttribute('data-theme', 'light');
+        });
+    </script>
+{% endblock %}

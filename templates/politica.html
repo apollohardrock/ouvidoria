@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Lucas Apollo">
+    <title>Política de Confidencialidade - {{ CLIENT_NAME }}</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Padrão Matriz (White-label): Importação em Cascata -->
+    <link rel="stylesheet" href="{% static 'css/identidade.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/politica.css' %}">
+</head>
+<body>
+    <div class="top-bar"></div>
+
+    <header class="navbar">
+        <div class="logo-container">
+            <img src="{% static 'img/logo.png' %}" alt="Logo {{ CLIENT_NAME }}" class="logo">
+        </div>
+        <nav class="nav-links">
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'acompanhar' %}">Acompanhar Protocolo</a>
+            <a href="{% url 'politica' %}" class="active">Política de Confidencialidade</a>
+        </nav>
+    </header>
+
+    <section class="hero-section" style="padding-bottom: 20px;">
+        <div class="hero-content">
+            <h1 class="main-title">Política de <span class="highlight-blue">Confidencialidade</span></h1>
+            <p class="subtitle">Entenda como protegemos os seus dados e garantimos a transparência no tratamento do seu relato.</p>
+        </div>
+    </section>
+
+    <main class="policy-wrapper">
+        <div class="policy-content">
+            <p>A <strong>{{ CLIENT_NAME }}</strong> está comprometida em manter os mais altos padrões de ética, integridade e transparência em todas as suas operações. Este Canal de Ouvidoria foi criado para fornecer um ambiente seguro e estruturado para o relato de condutas inadequadas.</p>
+
+            <h2>1. Garantia de Anonimato</h2>
+            <p>O denunciante tem o direito absoluto de optar pelo anonimato no momento do registro. Caso opte por não se identificar, o sistema não registrará endereços de IP, dados de navegação ou qualquer informação que possa rastrear a origem do envio.</p>
+
+            <h2>2. Proteção de Dados (LGPD)</h2>
+            <p>Todas as informações pessoais fornecidas voluntariamente serão tratadas com rigoroso sigilo, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018). O acesso a esses dados é restrito única e exclusivamente à equipe jurídica independente responsável pela apuração.</p>
+
+            <h2>3. Política de Não Retaliação</h2>
+            <p>A {{ CLIENT_NAME }} proíbe expressamente qualquer forma de retaliação, punição ou intimidação contra funcionários, clientes ou parceiros que, de boa-fé, utilizarem este canal para relatar suspeitas de violações ao nosso Código de Ética ou à legislação vigente.</p>
+
+            <h2>4. Análise Independente</h2>
+            <p>Para garantir total imparcialidade, as denúncias recebidas são direcionadas diretamente para uma assessoria jurídica externa e independente. Este comitê tem autonomia para investigar os fatos de forma objetiva, sem interferência interna que possa comprometer a validade da apuração.</p>
+
+            <h2>5. Transparência e Acompanhamento</h2>
+            <p>Ao finalizar o relato, o denunciante recebe um Protocolo Seguro exclusivo. Através deste código, é possível acompanhar o andamento da investigação e interagir com a equipe de análise de forma totalmente segura e anônima.</p>
+            
+            <div class="policy-footer">
+                <button type="submit" class="btn-submit"><a href="{% url 'inicio' %}" class="btn-enviar">Enviar um relato seguro</a></button>
+            </div>
+        </div>
+    </main>
+
+    <div class="copyright">
+        <p>Copyright © 2026 - Developed by <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
+    </div>
+</body>
+</html>

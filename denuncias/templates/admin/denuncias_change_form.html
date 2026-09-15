@@ -1,0 +1,31 @@
+{% extends "admin/change_form.html" %}
+{% load admin_modify %}
+
+{% block submit_buttons_bottom %}
+    {{ block.super }}
+    
+    {% if botao_voltar_inferior %}
+        <div id="btn-voltar-wrapper" style="display: none;">
+            {{ botao_voltar_inferior }}
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                const submitRow = document.querySelector('.submit-row');
+                const btnWrapper = document.getElementById('btn-voltar-wrapper');
+                
+                if (submitRow && btnWrapper && btnWrapper.firstElementChild) {
+                    // Adiciona o nosso botão logo após os botões originais
+                    submitRow.appendChild(btnWrapper.firstElementChild);
+                    btnWrapper.remove();
+                    
+                    // Força o comportamento Flexbox para não quebrar no celular
+                    submitRow.style.display = "flex";
+                    submitRow.style.flexWrap = "wrap";
+                    submitRow.style.alignItems = "center";
+                    submitRow.style.gap = "10px";
+                }
+            });
+        </script>
+    {% endif %}
+{% endblock %}
