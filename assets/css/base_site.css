@@ -1,0 +1,167 @@
+/* Ajustes gerais do container do admin */
+#container {
+    background-color: var(--bg-main);
+    font-family: var(--font-stack, 'Montserrat', sans-serif);
+}
+
+/* Cabeçalho do Painel Administrativo */
+#header {
+    background-color: var(--primary-color);
+    color: var(--text-main);
+    border-bottom: 2px solid var(--secondary-color);
+    padding: 10px 20px;
+}
+
+#header #branding h1 a {
+    color: var(--text-main);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#user-tools {
+    color: var(--text-main);
+}
+
+#user-tools a {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+#user-tools a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Navegação secundária (Breadcrumbs) */
+.breadcrumbs {
+    background-color: var(--bg-card);
+    color: var(--text-muted);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.breadcrumbs a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+/* Botões e Ações do Admin */
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: var(--secondary-color) !important;
+    color: #ffffff !important;
+    border-radius: var(--radius-pill, 50px) !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.button:hover, input[type=submit]:hover {
+    filter: brightness(0.9);
+}
+
+/* Tabelas e Módulos */
+.module {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-base, 16px);
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.module h2, .module caption {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 12px 15px;
+    font-size: 1rem;
+}
+
+/* Links internos das tabelas */
+table a:link, table a:visited {
+    color: var(--primary-color);
+}
+
+label {
+    color: var(--text-main) !important;
+}
+
+/* ==========================================================================
+   ESTILOS DA TELA DE RECUPERAÇÃO DE SENHA (password_reset_form.html)
+   ========================================================================== */
+
+.password-reset-wrapper {
+    max-width: 450px;
+    margin: 3rem auto;
+    padding: 2.5rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-base, 12px);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.password-reset-wrapper h2 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-family: var(--font-stack, 'Montserrat', sans-serif);
+    font-weight: 700;
+}
+
+.password-reset-wrapper p {
+    margin-bottom: 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.password-reset-group {
+    margin-bottom: 1.2rem;
+}
+
+.password-reset-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+.password-reset-group input[type="email"] {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    font-family: var(--font-stack, inherit);
+    font-size: 0.98rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-card);
+    color: var(--text-dark);
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.password-reset-group input[type="email"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(0, 96, 151, 0.1);
+}
+
+.btn-password-reset {
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-pill, 8px);
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: filter 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 12px rgba(242, 101, 34, 0.2);
+}
+
+.btn-password-reset:hover {
+    filter: brightness(0.9);
+    box-shadow: 0 6px 16px rgba(242, 101, 34, 0.3);
+}

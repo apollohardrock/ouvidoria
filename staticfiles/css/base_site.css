@@ -1,0 +1,88 @@
+/* ==========================================================================
+   base_site.css - ESTILIZAÇÃO DO PAINEL ADMINISTRATIVO (Django Admin)
+   ========================================================================== */
+
+/* Ajustes gerais do container do admin */
+#container {
+    background-color: var(--bg-main, #f4f7f6);
+    font-family: var(--font-stack, 'Montserrat', sans-serif);
+}
+
+/* Cabeçalho do Painel Administrativo */
+#header {
+    background-color: var(--primary-color, #006097);
+    color: var(--text-main, #ffffff);
+    border-bottom: 2px solid var(--secondary-color, #EC6536);
+    padding: 10px 20px;
+}
+
+#header #branding h1 a {
+    color: var(--text-main, #ffffff);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+#user-tools {
+    color: var(--text-main, #ffffff);
+}
+
+#user-tools a {
+    color: var(--secondary-color, #EC6536);
+    font-weight: 600;
+}
+
+#user-tools a:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* Navegação secundária (Breadcrumbs) */
+.breadcrumbs {
+    background-color: var(--bg-card, #ffffff);
+    color: var(--text-muted, #64748b);
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+
+.breadcrumbs a {
+    color: var(--primary-color, #006097);
+    text-decoration: none;
+}
+
+/* Botões e Ações do Admin */
+.button, input[type=submit], input[type=button], .submit-row input {
+    background: var(--secondary-color, #EC6536) !important;
+    color: #ffffff !important;
+    border-radius: var(--radius-pill, 50px) !important;
+    border: none !important;
+    padding: 10px 20px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+    transition: filter 0.2s ease;
+}
+
+.button:hover, input[type=submit]:hover {
+    filter: brightness(0.9);
+}
+
+/* Tabelas e Módulos */
+.module {
+    background: var(--bg-card, #ffffff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: var(--radius-base, 16px);
+    box-shadow: 0 4px 6px -1px rgba(15, 23, 42, 0.02);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.module h2, .module caption {
+    background-color: var(--primary-color, #006097);
+    color: #ffffff;
+    padding: 12px 15px;
+    font-size: 1rem;
+}
+
+/* Links internos das tabelas */
+table a:link, table a:visited {
+    color: var(--primary-color, #006097);
+}
