@@ -11,6 +11,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', 'chave-padrao-para-desenvolvimento')
 DEBUG = os.getenv('DEBUG') == 'True'
 
+# Pastas dos anexos
+MEDIA_URL = '/media/'
+# Força o uso exclusivo do HD Externo. Se a variável do .env não existir, ele bloqueia ou usa o caminho absoluto externo obrigatoriamente.
+MEDIA_ROOT = os.getenv('MEDIA_ROOT_EXTERNO', '/mnt/hd_externo/media')
+
 # Converte a string do .env em uma lista de hosts
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
@@ -85,9 +90,6 @@ USE_TZ = False
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [BASE_DIR / 'assets']
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # 3. Configurações de E-mail Profissionais
 # E-mail de produção

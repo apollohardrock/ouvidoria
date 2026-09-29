@@ -5,9 +5,23 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
+import os
 
 # Lista de formatos permitidos para todos os arquivos do sistema
 FORMATOS_VALIDOS = ['pdf', 'jpg', 'jpeg', 'png', 'docx', 'mp4', 'wav', 'mp3', 'm4a', 'aac', 'ogg']
+
+def caminho_anexos_cliente(instance, filename):
+    # Puxa o nome do cliente do .env e formata tirando os espaços
+    nome_cliente = settings.CLIENT_NAME.replace(" ", "_").lower()
+    
+    # Organiza em subpastas: se for da denúncia principal ou do chat
+    if hasattr(instance, 'denuncia'):
+        subpasta = 'provas_iniciais'
+    else:
+        subpasta = 'chat_interacoes'
+        
+    # O caminho final ficará: skyglass_canela/provas_iniciais/arquivo.pdf
+    return f'{nome_cliente}/{subpasta}/{filename}'
 
 class Denuncia(models.Model):
     STATUS_CHOICES = [
@@ -45,13 +59,8 @@ class Denuncia(models.Model):
         return f"Protocolo: {self.protocolo} - Status: {self.get_status_display()}"
 
 class AnexoDenuncia(models.Model):
-    denuncia = models.ForeignKey(Denuncia, on_delete=models.CASCADE, related_name='anexos', verbose_name="Denúncia")
-    # Pasta única para anexos
-    arquivo = models.FileField(
-        upload_to='denuncias/anexos/', 
-        verbose_name="Arquivo Anexo",
-        validators=[FileExtensionValidator(FORMATOS_VALIDOS)]
-    )
+    denuncia = models.ForeignKey(Denuncia, related_name='anexos', on_delete=models.CASCADE)
+    arquivo = models.FileField(upload_to=caminho_anexos_cliente)
     enviado_em = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -83,10 +92,9 @@ class Mensagem(models.Model):
             return "Mensagem"
 
 
-# NOVA TABELA: Permite múltiplos arquivos por mensagem
 class AnexoMensagem(models.Model):
     mensagem = models.ForeignKey(Mensagem, related_name='anexos', on_delete=models.CASCADE)
-    arquivo = models.FileField(upload_to='chat_anexos/')
+    arquivo = models.FileField(upload_to=caminho_anexos_cliente)
 
 @receiver(post_save, sender=Mensagem)
 def notificar_denunciante_resposta(sender, instance, created, **kwargs):
