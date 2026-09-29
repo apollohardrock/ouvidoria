@@ -7,6 +7,7 @@
     <meta name="author" content="Lucas Apollo">
     <title>Política de Confidencialidade - {{ CLIENT_NAME }}</title>
     
+    <!-- Importação das Fontes -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     
     <!-- Padrão Matriz (White-label): Importação em Cascata -->
@@ -19,7 +20,7 @@
 
     <header class="navbar">
         <div class="logo-container">
-            <img src="{% static 'img/logo.png' %}" alt="Logo {{ CLIENT_NAME }}" class="logo">
+            <img src=" {{ CLIENT_LOGO_URL }} " alt="Logotipo {{ CLIENT_NAME }}" class="logo">
         </div>
         <nav class="nav-links">
             <a href="{% url 'inicio' %}">Início</a>
@@ -28,9 +29,9 @@
         </nav>
     </header>
 
-    <section class="hero-section" style="padding-bottom: 20px;">
+    <section class="hero-section hero-policy">
         <div class="hero-content">
-            <h1 class="main-title">Política de <span class="highlight-blue">Confidencialidade</span></h1>
+            <h1 class="main-title">Política de Confidencialidade</h1>
             <p class="subtitle">Entenda como protegemos os seus dados e garantimos a transparência no tratamento do seu relato.</p>
         </div>
     </section>
@@ -55,7 +56,8 @@
             <p>Ao finalizar o relato, o denunciante recebe um Protocolo Seguro exclusivo. Através deste código, é possível acompanhar o andamento da investigação e interagir com a equipe de análise de forma totalmente segura e anônima.</p>
             
             <div class="policy-footer">
-                <button type="submit" class="btn-submit"><a href="{% url 'inicio' %}" class="btn-enviar">Enviar um relato seguro</a></button>
+                <!-- HTML corrigido: Transformado em um link direto com visual de botão -->
+                <a href="{% url 'inicio' %}" class="btn-outline">Enviar um relato seguro</a>
             </div>
         </div>
     </main>

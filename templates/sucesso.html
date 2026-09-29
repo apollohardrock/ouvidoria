@@ -7,25 +7,21 @@
     <meta name="author" content="Lucas Apollo">
     <title>Ouvidoria Enviada | {{ CLIENT_NAME }}</title>
 
-    <!-- 1º: As Variáveis de Identidade da Empresa -->
     <link rel="stylesheet" href="{% static 'css/identidade.css' %}">
-    
-    <!-- 2º: O Esqueleto global -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-
-    <!-- 3º: O estilo específico desta página -->
     <link rel="stylesheet" href="{% static 'css/sucesso.css' %}">
 </head>
 <body>
+    <div class="top-bar"></div>
 
     <header class="navbar">
         <div class="logo-container">
-            <img src="{% static 'img/logo.png' %}" alt="Logotipo da Empresa" class="logo">
+            <img src=" {{ CLIENT_LOGO_URL }} " alt="Logotipo {{ CLIENT_NAME }}" class="logo">
         </div>
         <nav class="nav-links">
-            <a href="/" class="active">Início</a>
-            <a href="/acompanhar">Acompanhar Protocolo</a>
-            <a href="/politica">Política de Confidencialidade</a>
+            <a href="{% url 'inicio' %}">Início</a>
+            <a href="{% url 'acompanhar' %}">Acompanhar Protocolo</a>
+            <a href="{% url 'politica' %}">Política de Confidencialidade</a>
         </nav>
     </header>
 
@@ -59,7 +55,7 @@
             <button class="btn-sucesso-action btn-copiar" id="btn-copiar-texto" onclick="copiarProtocolo()">
                 Copiar Número do Protocolo
             </button>
-            <a href="/acompanhar" class="btn-sucesso-action btn-acompanhar">
+            <a href="{% url 'acompanhar' %}?protocolo={{ protocolo }}" class="btn-sucesso-action btn-acompanhar">
                 Acompanhar Protocolo
             </a>
         </div>
@@ -67,7 +63,7 @@
     </main>
 
     <div class="copyright success-copyright">
-        <p>Copyright © 2026 - Developed by <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
+        <p>Copyright © 2026 - Desenvolvido por <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
     </div>
 
     <script>
@@ -78,7 +74,7 @@
                 const btnTexto = document.getElementById('btn-copiar-texto');
                 const textoOriginal = "Copiar Número do Protocolo";
                 
-                /* Manipulação visual transferida inteiramente para a classe CSS */
+                /* Manipulação visual via classe CSS */
                 btnTexto.classList.add('btn-copiado-sucesso');
                 btnTexto.innerText = "✓ Protocolo Copiado!";
                 

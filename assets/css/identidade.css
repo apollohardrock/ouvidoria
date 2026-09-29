@@ -3,20 +3,20 @@
    ========================================================================== */
 :root {
     /* Cores Principais */
-    --primary-color: #00198a;   
-    --secondary-color: #998700; 
+    --primary-color: #333333;   
+    --secondary-color: #6c757d; 
 
     /* Fundo e Textos */
-    --bg-main: #9c9a86;
-    --bg-secondary: #061c31;
-    --bg-card: #061c3188;         
-    --text-main: #ffffff;       
+    --bg-main: #f8f9fa;
+    --bg-secondary: #e9ecef;
+    --bg-card: #ffffff;         
+    --text-main: #212529;       
     --text-dark: #000000;       
-    --text-muted: #000000;      
-    --border-color: #e2e8f0;    
+    --text-muted: #868e96;      
+    --border-color: #dee2e6;    
 
     /* Tipografia e Arredondamentos */
-    --font-stack: 'Montserrat', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-stack: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     --radius-base: 16px;
     --radius-pill: 50px;
 }

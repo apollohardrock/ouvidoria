@@ -10,7 +10,7 @@
 <!-- Substitui o título padrão do Django pela Logo e Nome dinâmico -->
 {% block content_title %}
 <div class="login-header-custom">
-    <img src="{% static 'img/logo.png' %}" alt="Logo" class="logo">
+    <img src=" {{ CLIENT_LOGO_URL }} " alt="Logotipo {{ CLIENT_NAME }}" class="logo">
     <h2>Portal de Análise - {{ CLIENT_NAME}}</h2>
 </div>
 {% endblock %}

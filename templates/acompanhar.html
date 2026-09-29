@@ -16,12 +16,11 @@
     </head>
     <body>
 
-        <!-- Barra superior azul escura -->
         <div class="top-bar"></div>
 
         <header class="navbar">
             <div class="logo-container">
-                <img src="{% static 'img/logo.png' %}" alt="Logotipo da Empresa" class="logo">
+                <img src=" {{ CLIENT_LOGO_URL }} " alt="Logotipo {{ CLIENT_NAME }}" class="logo">
             </div>
             <nav class="nav-links">
                 <a href="{% url 'inicio' %}">Início</a> 
@@ -30,13 +29,11 @@
             </nav>
         </header>
 
-        <!-- Caixa Escura Arredondada para o Título -->
         <section class="hero-box">
             <h1>Acompanhe o seu Relato</h1>
             <p>Insira o número do protocolo recebido para consultar o estado e interagir com a equipe de análise de forma confidencial.</p>
         </section>
 
-        <!-- Caixa Branca de Contraste para o Formulário e Chat -->
         <section class="form-container tracking-wrapper">
             
             <div class="search-area">
@@ -59,19 +56,47 @@
             {% endif %}
 
             {% if denuncia %}
-                <div class="protocol-results">
+                <div class="card-custom">
                     
-                    <div class="protocol-header">
-                        <h2 class="protocol-title">
-                            Protocolo: <span>{{ denuncia.protocolo }}</span>
-                        </h2>
-                        
-                        <span class="status-badge 
-                            {% if denuncia.status == 'Pendente' or 'Novo' in denuncia.status %} status-pendente
-                            {% elif 'Análise' in denuncia.status or 'Andamento' in denuncia.status %} status-analise
-                            {% else %} status-concluido {% endif %}">
-                            ● {{ denuncia.status }}
-                        </span>
+                    <!-- CABEÇALHO UNIFICADO: PROTOCOLO + STATUS + ÍCONE DE INFORMAÇÃO -->
+                    <div class="protocol-header-flex">
+                        <h3 style="color: #0a3153; margin: 0; font-size: 1.2rem;">
+                            Protocolo: <span style="color: #2b6cb0;">{{ denuncia.protocolo }}</span>
+                        </h3>
+
+                        <div style="display: flex; align-items: center;">
+                            <span style="padding: 6px 14px; border-radius: 20px; font-weight: 700; font-size: 0.85rem; display: inline-block;
+                                {% if 'Pendente' in denuncia.status %} background-color: #fef3c7; color: #d97706; border: 1px solid #fde68a;
+                                {% elif 'Análise' in denuncia.status or 'processamento' in denuncia.status or 'Abertura' in denuncia.status %} background-color: #e0f2fe; color: #0369a1; border: 1px solid #bae6fd;
+                                {% elif 'Concluída' in denuncia.status %} background-color: #dcfce7; color: #15803d; border: 1px solid #bbf7d0;
+                                {% else %} background-color: #f1f5f9; color: #475569; border: 1px solid #e2e8f0; {% endif %}">
+                                {{ denuncia.status }}
+                            </span>
+
+                            <!-- Balão explicativo dinâmico -->
+                            <div class="tooltip-wrapper">
+                                <span class="info-icon">i</span>
+                                <span class="tooltip-balao">
+                                    {% if 'Análise' in denuncia.status %}
+                                        A ocorrência foi recebida pelo responsável e está passando por análise para avaliação dos fatos e definição dos próximos passos.
+                                    {% elif 'processamento' in denuncia.status %}
+                                        A análise inicial concluiu pela necessidade de abertura de investigação.
+                                    {% elif 'arquivamento' in denuncia.status %}
+                                        A análise inicial entendeu que não há causa que justifique a abertura de sindicância ou, ainda, que não há elementos suficientes para dar-se seguimento a análise de abertura ou não de sindicância.
+                                    {% elif 'Diligência' in denuncia.status %}
+                                        A análise da ocorrência depende da realização de alguma diligência ou obtenção de informações adicionais para que seja possível dar continuidade à apuração.
+                                    {% elif 'Abertura' in denuncia.status %}
+                                        Foi identificada a necessidade de uma apuração formal dos fatos, sendo instaurada sindicância para investigação e esclarecimento da ocorrência.
+                                    {% elif 'Concluída' in denuncia.status %}
+                                        A análise e/ou apuração da ocorrência foi concluída, não havendo novas diligências previstas no processo, bem como haverá, mediante mensagem por chat, informações acerca da conclusão e eventuais providências/tratativas da empregadora quando ao fato investigado.
+                                    {% elif 'Encerrada' in denuncia.status %}
+                                        A ocorrência teve seu encerramento e foi arquivada.
+                                    {% else %}
+                                        Este é o status atual de andamento do seu relato seguro.
+                                    {% endif %}
+                                </span>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="info-grid">
@@ -85,8 +110,8 @@
                         </div>
                     </div>
 
-                    <div class="summary-section">
-                        <strong class="summary-title">Resumo do Relato Enviado</strong>
+                    <div style="margin-bottom: 2rem;">
+                        <strong style="display: block; font-size: 0.85rem; color: #475569; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px;">Resumo do Relato Enviado</strong>
                         <div class="description-box">
                             {{ denuncia.descricao }}
                         </div>
@@ -98,67 +123,83 @@
 
                     <div class="chat-messages-container" id="chatContainer">
                         {% if not mensagens %}
-                            <p class="empty-chat-msg">
+                            <p style="color: #64748b; text-align: center; font-size: 0.9rem; margin: auto 0; padding: 1rem;">
                                 Ainda não existem mensagens nem atualizações registadas neste processo.
                             </p>
                         {% else %}
                             {% for msg in mensagens %}
+                                <!-- SE FOR DA EQUIPE E ESTIVER INVISÍVEL, O DENUNCIANTE NÃO VERÁ NADA (Nem a div do balão é criada) -->
                                 {% if not msg.usuario_admin or msg.visivel_denunciante %}
-                                    <div class="chat-bubble {% if msg.usuario_admin %}chat-bubble-admin{% else %}chat-bubble-user{% endif %}">
-                                        <span class="chat-author-tag">
-                                            {% if msg.usuario_admin %}Equipe de Análise{% else %}Você (Denunciante){% endif %}
-                                        </span>
+                                    <div style="padding: 12px 18px; border-radius: 15px; max-width: 85%; margin-bottom: 15px; position: relative; line-height: 1.4; 
+                                        {% if msg.usuario_admin %}background-color: #e3f2fd; color: #0d47a1; margin-left: auto; border-bottom-right-radius: 0; text-align: right;
+                                        {% else %}background-color: #fff3e0; color: #e65100; margin-right: auto; border-bottom-left-radius: 0; border: 1px solid #ffe0b2;{% endif %}">
                                         
-                                        <div class="chat-msg-text">{{ msg.texto|linebreaksbr }}</div>
+                                        <strong style="font-size: 13px; opacity: 0.8; text-transform: uppercase;">
+                                            {% if msg.usuario_admin %}Equipe de Análise{% else %}Você{% endif %}
+                                        </strong><br>
                                         
+                                        <span style="font-size: 15px;">{{ msg.texto|linebreaksbr }}</span>
+                                        
+                                        <!-- Loop para mostrar TODOS os anexos amarrados a esta mensagem -->
                                         {% for anexo in msg.anexos.all %}
-                                            <div class="chat-attachment">
-                                                <a href="{{ anexo.arquivo.url }}" target="_blank">
-                                                    📎 Baixar anexo enviado ({{ forloop.counter }})
+                                            <div style="margin-top: 8px;">
+                                                <a href="{{ anexo.arquivo.url }}" target="_blank" style="color: inherit; text-decoration: underline; font-weight: bold; font-size: 13px;">
+                                                    📎 Baixar anexo enviado {{ forloop.counter }}
                                                 </a>
                                             </div>
                                         {% endfor %}
                                         
-                                        <span class="chat-time">{{ msg.criado_em|date:"d/m/Y H:i" }}</span>
+                                        <small style="display: block; font-size: 11px; opacity: 0.6; margin-top: 8px;">{{ msg.criado_em|date:"d/m/Y H:i" }}</small>
                                     </div>
                                 {% endif %}
                             {% empty %}
-                                <p class="empty-chat-msg"><em>Aguardando análise inicial da equipe.</em></p>
+                                <p style="text-align: center; color: #777;"><em>Aguardando análise inicial da equipe.</em></p>
                             {% endfor %}
                         {% endif %}
                     </div>
 
-                    <form method="POST" action="{% url 'acompanhar' %}?protocolo={{ denuncia.protocolo }}" enctype="multipart/form-data" class="reply-form-card">
+                    <form method="POST" action="" enctype="multipart/form-data" class="reply-form-card">
                         {% csrf_token %}
                         <input type="hidden" name="protocolo" value="{{ denuncia.protocolo }}">
                         <input type="hidden" name="nova_mensagem" value="true">
 
-                        <div class="reply-input-group">
-                            <label class="form-label-custom">
-                                Adicionar novas informações ou responder à equipe:
+                        <div style="margin-bottom: 0.8rem;">
+                            <label style="font-size: 0.88rem; font-weight: 700; color: #1e293b; display: block; margin-bottom: 6px;">
+                                Adicionar novas informações ou responder à equipa:
                             </label>
-                            <textarea name="mensagem_texto" rows="3" class="reply-textarea" placeholder="Escreva aqui novos detalhes, respostas ou esclarecimentos sobre o caso..." required></textarea>
+                            <textarea name="mensagem_texto" rows="3" class="reply-textarea" placeholder="Escreva aqui novos detalhes, respostas ou esclarecimentos sobre o caso..."></textarea>
                         </div>
 
                         <div class="reply-actions">
-                            <div class="upload-area">
-                                <div class="upload-btn-wrapper">
-                                    <button type="button" class="btn-anexo-custom" onclick="document.getElementById('arquivo-chat').click()">
+                            <div style="margin-top: 15px; text-align: left;">
+                                <label style="font-size: 13px; color: #555;">Anexar provas (opcional):</label><br>
+                                
+                                <div class="upload-btn-wrapper" style="margin-top: 5px;">
+                                    <!-- Botão customizado igual ao da página inicial -->
+                                    <button type="button" class="btn-anexo" style="padding: 8px 16px; width: auto;" onclick="document.getElementById('arquivo-chat').click()">
                                         📁 ADICIONAR PROVAS
                                     </button>
-                                    <input type="file" name="mensagem_arquivos" id="arquivo-chat" class="hidden-input" multiple>
+                                    <!-- O input real invisível -->
+                                    <input type="file" name="mensagem_arquivos" id="arquivo-chat" multiple style="display:none;">
                                 </div>
-                                <ul id="lista-arquivos-chat" class="chat-file-list"></ul>
+                                
+                                <!-- Lista onde os arquivos vão se acumular -->
+                                <ul id="lista-arquivos-chat" style="list-style: none; margin-top: 10px; padding: 0; color: #333; font-size: 13px;"></ul>
                             </div>
                             
-                            <button type="submit" class="btn-submit btn-auto-width">
-                                Enviar Atualização
+                            <button type="submit" class="btn-primary-custom" style="padding: 0.75rem 1.5rem;">
+                                Enviar Atualização 🚀
                             </button>
                         </div>
                     </form>
+
                 </div>
             {% endif %}
         </section>
+
+        <div class="copyright">
+            <p>Copyright © 2026 - Developed by <em><a href="https://lucasapollo.dev.br/" target="_blank">lucasapollo.dev.br</a></em></p>
+        </div>
 
         <script>
             document.addEventListener("DOMContentLoaded", function() {

@@ -1,9 +1,13 @@
+/* ==========================================================================
+   login.css - ESTILIZAÇÃO WHITE-LABEL DA TELA DE LOGIN DO ADMIN
+   ========================================================================== */
+
 /* 1. Oculta o cabeçalho azul nativo do Django apenas na tela de login para deixar mais limpo */
 #header {
     display: none;
 }
 
-/* 2. Remove a frase nativa do Django ("Se esqueceu das suas credenciais de login?") apontada na imagem */
+/* 2. Remove a frase nativa do Django ("Se esqueceu das suas credenciais de login?") */
 .password-reset-link {
     display: none !important;
 }
@@ -15,33 +19,36 @@
 }
 
 .login-header-custom img {
-    max-width: 220px;
+    max-width: 220px;       /* Trava a largura máxima */
+    max-height: 100px;      /* Trava a altura máxima para evitar distorções verticais */
+    width: auto;
+    object-fit: contain;    /* Garante que a imagem não seja cortada */
     margin-bottom: 15px;
-    /* Adiciona o fundo azul escuro da empresa apenas na caixa da logo para dar contraste ao branco */
-    background-color: #0a3153; 
-    padding: 20px;
-    border-radius: 12px;
+    background-color: var(--bg-card); /* Usa o fundo branco do card da sua paleta */
+    padding: 15px;
+    border-radius: var(--radius-base);
+    border: 1px solid var(--border-color); /* Borda sutil combinando com os formulários */
 }
 
 .login-header-custom h2 {
-    font-family: 'Montserrat', sans-serif;
-    color: #0a3153;
+    font-family: var(--font-stack);
+    color: var(--primary-color); /* Substitui o azul antigo pela sua variável principal */
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
 }
 
-/* 4. Mantém apenas o seu link customizado de 'Esqueci a Senha' no rodapé da caixa */
+/* 4. Estiliza o link de 'Esqueci a Senha' no rodapé da caixa */
 .forgot-password-link {
     display: block;
     text-align: center;
     margin-top: 25px;
     padding-top: 15px;
-    border-top: 1px solid #e5e7eb;
+    border-top: 1px solid var(--border-color);
 }
 
 .forgot-password-link a {
-    color: #ff0000; 
+    color: var(--primary-color); 
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95rem;
@@ -50,4 +57,5 @@
 
 .forgot-password-link a:hover {
     opacity: 0.7;
+    text-decoration: underline;
 }

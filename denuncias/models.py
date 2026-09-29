@@ -11,13 +11,13 @@ FORMATOS_VALIDOS = ['pdf', 'jpg', 'jpeg', 'png', 'docx', 'mp4', 'wav', 'mp3', 'm
 
 class Denuncia(models.Model):
     STATUS_CHOICES = [
-        ('RECEBIDA', 'Recebida - Aguardando Análise'),
-        ('EM_ANALISE', 'Em Análise'),
-        ('pendente_diligencia', 'Pendente de Diligência'),
-        ('abertura_sindicancia', 'Abertura de Sindicância'),
-        ('CONCLUIDA', 'Concluída / Finalizada'),
-        ('ARQUIVADA', 'Arquivada'),
-        
+        ('Em Análise', 'Em Análise'),
+        ('Determinado o processamento de sindicância interna','Determinado o processamento de sindicância interna'),
+        ('Determinado o arquivamento sumário por falta de informações ou ausência de objeto passível de sindicância','Determinado o arquivamento sumário por falta de informações ou ausência de objeto passível de sindicância'),
+        ('Pendente de Diligência', 'Pendente de Diligência'),
+        ('Abertura de Sindicância', 'Abertura de Sindicância'),
+        ('Concluída / Finalizada', 'Concluída / Finalizada'),
+        ('Encerrada', 'Encerrada'),
     ]
 
     protocolo = models.CharField(max_length=30, unique=True, verbose_name="Número do Protocolo")
@@ -30,7 +30,7 @@ class Denuncia(models.Model):
     telefone = models.CharField(max_length=20, blank=True, null=True, verbose_name="Telefone")
     email = models.EmailField(blank=True, null=True, verbose_name="E-mail")
     
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='RECEBIDA', verbose_name="Status da Denúncia")
+    status = models.CharField(max_length=150, choices=STATUS_CHOICES, default='RECEBIDA', verbose_name="Status da Denúncia")
     resposta_advogada = models.TextField(blank=True, null=True, verbose_name="Atualização / Parecer para o Denunciante")
     
     criado_em = models.DateTimeField(auto_now_add=True, verbose_name="Data de Envio")

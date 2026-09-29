@@ -9,7 +9,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 2. Configurações Dinâmicas (leitura do .env)
 SECRET_KEY = os.getenv('SECRET_KEY', 'chave-padrao-para-desenvolvimento')
-DEBUG = os.getenv('DEBUG', 'True') == 'True'
+DEBUG = os.getenv('DEBUG') == 'True'
 
 # Converte a string do .env em uma lista de hosts
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')

@@ -22,7 +22,7 @@
 
             <header class="navbar">
                 <div class="logo-container">
-                    <img src=" {% static 'img/logo.png' %} " alt="Logotipo da Empresa" class="logo">
+                    <img src=" {{ CLIENT_LOGO_URL }} " alt="Logotipo {{ CLIENT_NAME }}" class="logo">
                 </div>
                 <nav class="nav-links">
                     <a href="/" class="active">Início</a> | 
@@ -134,12 +134,9 @@
                         <ul id="lista-arquivos" style="list-style: none; margin-top: 10px; color: #333; font-size: 14px;"></ul>
                         
                         <label class="custom-checkbox">
-                            <!-- O input invisível -->
                             <input type="checkbox" id="boa_fe" name="boa_fe" required>
-                            <!-- A nossa caixinha desenhada no CSS -->
                             <span class="checkmark"></span>
-                            <!-- O texto como link (o event.stopPropagation evita que clicar no link marque a caixa sem querer) -->
-                            <a href="#" onclick="abrirModal(event)" style="color: #ffffff; text-decoration: underline; font-weight: 500;">
+                            <a href="#" onclick="abrirModal(event)" style="text-decoration: underline; font-weight: 500;">
                                 Termo de ciência e comprometimento
                             </a>
                         </label>

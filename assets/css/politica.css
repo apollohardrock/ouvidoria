@@ -1,31 +1,35 @@
-.hero-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.policy-wrapper {
-    max-width: 800px;
-    margin: 2rem auto 6rem auto;
-    padding: 0 1.5rem;
+/* ==========================================================================
+   politica.css - ESTRUTURA DA PÁGINA DE POLÍTICA
+   ========================================================================== */
+
+/* Substitui o atributo style="..." que estava no HTML */
+.hero-policy {
+    padding-bottom: 20px;
+    text-align: center;
 }
 
-/* O cartão branco centralizado */
+.policy-wrapper {
+    max-width: 820px;
+    margin: 2rem auto 6rem auto;
+    padding: 0 20px;
+}
+
+/* O cartão de conteúdo que herda as cores da matriz */
 .policy-content {
     background-color: var(--bg-card);
-    color: var(--text-dark);
+    color: var(--text-main);
     border: 1px solid var(--border-color);
     border-radius: var(--radius-base);
     padding: 3rem;
-    box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.05);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-/* Títulos das seções de política */
 .policy-content h2 {
     color: var(--primary-color);
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: 700;
     margin-top: 2rem;
-    margin-bottom: 0.8rem;
+    margin-bottom: 1rem;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 8px;
 }
@@ -34,19 +38,18 @@
     margin-top: 1rem;
 }
 
-/* Textos descritivos */
 .policy-content p {
-    color: var(--text-dark);
+    color: var(--text-muted);
     margin-bottom: 1.2rem;
     font-size: 1rem;
     line-height: 1.7;
 }
 
 .policy-content strong {
-    color: var(--primary-color);
+    color: var(--text-main);
 }
 
-/* Rodapé do cartão com botão de envio */
+/* Rodapé interno e botão vazado */
 .policy-footer {
     text-align: center;
     margin-top: 40px;
@@ -54,58 +57,34 @@
     border-top: 1px solid var(--border-color);
 }
 
-.policy-footer .btn-enviar {
+.btn-outline {
     display: inline-block;
-    width: auto;
-    text-decoration: none;
-    padding: 14px 35px;
-}
-
-.btn-submit {
-    margin-top: 0;
-    width: auto;
-    border-radius: 10px;
-    background: var(--secondary-color);
-    color: #ffffff;
-    border: none;
-    padding: 0.85rem 1.8rem;
+    background-color: transparent;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    border-radius: var(--radius-pill);
+    padding: 12px 30px;
     font-weight: 700;
-    cursor: pointer;
-    transition: filter 0.2s;
-}
-
-/* Rodapé da página (Copyright) */
-.copyright {
-    text-align: center;
-    padding: 20px;
-    margin-top: 20px;
-    color: var(--text-main);
-    font-size: 0.85rem;
-    opacity: 0.8;
-}
-
-.copyright a {
-    color: var(--text-main);
     text-decoration: none;
-    font-weight: 600;
+    transition: all 0.2s ease;
 }
 
-.copyright a:hover {
-    text-decoration: underline;
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-card);
 }
 
 /* Responsividade Mobile */
 @media (max-width: 768px) {
     .policy-content {
-        padding: 1.8rem 1.2rem;
+        padding: 2rem 1.5rem;
     }
     
     .policy-content h2 {
         font-size: 1.15rem;
     }
     
-    .policy-footer .btn-enviar {
+    .btn-outline {
         width: 100%;
-        padding: 14px 20px;
     }
 }
