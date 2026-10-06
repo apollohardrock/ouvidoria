@@ -5,6 +5,13 @@ from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib import messages
 from .models import Denuncia, AnexoDenuncia, Mensagem, AnexoMensagem
+import os
+from dotenv import load_dotenv
+
+# 1. Carrega as variáveis do arquivo .env
+load_dotenv()
+
+CLIENT_NAME = os.getenv('CLIENT_NAME')
 
 def inicio(request):
     if request.method == 'POST':
@@ -54,7 +61,7 @@ def inicio(request):
 
         corpo_notificacao = f"""Olá,
 
-            Uma nova denúncia foi registrada no Canal de Denúncias da Skyglass Canela.
+            Uma nova denúncia foi registrada no Canal de Ouvidoria da {CLIENT_NAME}.
 
             Protocolo: {protocolo}
             Status: Recebida - Aguardando Análise
@@ -65,7 +72,7 @@ def inicio(request):
             {link_painel}
 
             Atenciosamente,
-            Sistema Automático - Projeto Canal de Denúncias
+            Sistema Automático - Projeto Canal de Ouvidoria
             """
 
         try:
@@ -81,7 +88,7 @@ def inicio(request):
 
         # 6. NOVA LÓGICA: Enviar recibo para o usuário se ele se identificou
         if anonimato == 'nao' and nova_denuncia.email and nova_denuncia.email != 'Não informado':
-            assunto_usuario = f"Protocolo Seguro: {protocolo} - Skyglass Canela"
+            assunto_usuario = f"Protocolo Seguro: {protocolo} - {CLIENT_NAME}"
             mensagem_usuario = (
                 f"Olá {nova_denuncia.nome},\n\n"
                 f"Recebemos sua denúncia em nosso Canal Seguro.\n"
@@ -89,7 +96,7 @@ def inicio(request):
                 f"Você será notificado por este e-mail sempre que houver uma movimentação ou "
                 f"resposta da nossa equipe de análise independente.\n\n"
                 f"Sua voz importa.\n"
-                f"Equipe Skyglass Canela"
+                f"Equipe {CLIENT_NAME}"
             )
             try:
                 # Dispara o e-mail para o usuário
@@ -150,7 +157,7 @@ def acompanhar_protocolo(request):
                             {link_painel}
 
                             Atenciosamente,
-                            Ouvidoria Skyglass
+                            Ouvidoria {CLIENT_NAME}
                             """
                     try:
                         send_mail(

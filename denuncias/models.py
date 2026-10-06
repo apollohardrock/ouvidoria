@@ -6,6 +6,13 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.conf import settings
 import os
+from dotenv import load_dotenv
+
+# 1. Carrega as variáveis do arquivo .env
+load_dotenv()
+
+CLIENT_NAME = os.getenv('CLIENT_NAME')
+DOMINIO_ATUAL = os.getenv('DOMINIO_ATUAL')
 
 # Lista de formatos permitidos para todos os arquivos do sistema
 FORMATOS_VALIDOS = ['pdf', 'jpg', 'jpeg', 'png', 'docx', 'mp4', 'wav', 'mp3', 'm4a', 'aac', 'ogg']
@@ -20,7 +27,7 @@ def caminho_anexos_cliente(instance, filename):
     else:
         subpasta = 'chat_interacoes'
         
-    # O caminho final ficará: skyglass_canela/provas_iniciais/arquivo.pdf
+    # O caminho final ficará: nome_cliente/provas_iniciais/arquivo.pdf
     return f'{nome_cliente}/{subpasta}/{filename}'
 
 class Denuncia(models.Model):
@@ -100,7 +107,7 @@ class AnexoMensagem(models.Model):
 def notificar_denunciante_resposta(sender, instance, created, **kwargs):
     """
     Este gatilho dispara automaticamente sempre que uma nova Mensagem é guardada.
-    Se a mensagem for nova e for enviada por um Administrador (Advogada/Diretor),
+    Se a mensagem for nova e for enviada por um Administrador,
     ele dispara um e-mail para o Denunciante.
     """
     if created and instance.usuario_admin:
@@ -111,13 +118,13 @@ def notificar_denunciante_resposta(sender, instance, created, **kwargs):
             assunto = f"[ATUALIZAÇÃO] Nova resposta no seu Protocolo {denuncia.protocolo}"
             mensagem = (
                 f"Olá {denuncia.nome},\n\n"
-                f"A equipe de Análise & Compliance da Skyglass Canela acabou de enviar uma nova mensagem "
+                f"A equipe de Análise & Compliance da {CLIENT_NAME} acabou de enviar uma nova mensagem "
                 f"no seu protocolo: {denuncia.protocolo}.\n\n"
-                f"Para ler a resposta, baixar eventuais anexos e continuar a interagir com a equipa, aceda ao nosso portal seguro:\n"
-                f"https://ouvidoria.skyglasscanela.com.br/acompanhar\n\n"
+                f"Para ler a resposta, baixar eventuais anexos e continuar a interagir com a equipe, acesse o nosso portal seguro:\n"
+                f"https://{DOMINIO_ATUAL}/acompanhar\n\n"
                 f"A sua voz importa e estamos a cuidar do seu relato com total confidencialidade.\n\n"
                 f"Atenciosamente,\n"
-                f"Equipa Skyglass Canela"
+                f"Equipe {CLIENT_NAME}"
             )
             try:
                 send_mail(

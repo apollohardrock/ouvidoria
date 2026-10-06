@@ -21,6 +21,7 @@ ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 CLIENT_NAME = os.getenv('CLIENT_NAME')
 CLIENT_LOGO_URL = os.getenv('CLIENT_LOGO_URL')
+DOMINIO_ATUAL = os.getenv('DOMINIO_ATUAL', 'http://127.0.0.1:8000')
 
 INSTALLED_APPS = [
     'django.contrib.admin',

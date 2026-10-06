@@ -10,6 +10,13 @@ from django import forms
 from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from .models import Denuncia, AnexoDenuncia, Mensagem, AnexoMensagem
+import os
+from dotenv import load_dotenv
+
+# 0. Carrega as variáveis do arquivo .env
+load_dotenv()
+
+CLIENT_NAME = os.getenv('CLIENT_NAME')
 
 # =========================================================================
 # 1. CONFIGURAÇÃO DOS INLINES
@@ -139,7 +146,7 @@ class DenunciaAdmin(admin.ModelAdmin):
 
     def save_model(self, request, obj, form, change):
         if change and obj.anonimato == 'nao' and obj.email and obj.email != 'Não informado':
-            assunto = f"Atualização de Protocolo [{obj.protocolo}] - Skyglass Canela"
+            assunto = f"Atualização de Protocolo [{obj.protocolo}] - {CLIENT_NAME}"
             mensagem = "Olá, a sua manifestação teve uma nova movimentação. Acesse o canal para visualizar."
             try:
                 send_mail(assunto, mensagem, settings.EMAIL_HOST_USER, [obj.email], fail_silently=True)
